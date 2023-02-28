@@ -17,3 +17,4 @@ ex. {% if product.price == '0.00' %}
 or ex.
 
 {% for item in product.grid}
+    {% if product.proce == '0.00' %}
