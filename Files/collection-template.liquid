@@ -51,11 +51,11 @@
                           </span>
                         </span>
                         <p class="grid-link__title">{{ 'home_page.onboarding.product_title' | t }}</p>
-                        
+                      {% unless product.price <= 0 %}
                         <p class="grid-link__meta">
                           <strong>$19.99</strong>
                         </p>
-                      
+                      {% endunless %}
                       </a>
                     </div>
                   {% endfor %}
