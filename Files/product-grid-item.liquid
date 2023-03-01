@@ -12,9 +12,11 @@
 
 {% if featured.title == '' %}
   {% comment %}add default state for product block in storefront editor{% endcomment %}
-  {% capture product_title %}{{ 'home_page.onboarding.product_title' | t }}{% endcapture %}
+  {% capture product_title %}
+    {{ 'home_page.onboarding.product_title' | t }}{% endcapture %}
 {% else %}
-  {% capture product_title %}{{ featured.title | escape }}{% endcapture %}
+  {% capture product_title %}
+    {{ featured.title | escape }}{% endcapture %}
 {% endif %}
 
 <div class="{% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %}">
@@ -40,24 +42,33 @@
             {% include 'image-style' with image: featured.featured_image, width: product_width, height: 480, wrapper_id: wrapper_id, img_id: img_id %}
             <div id="{{ wrapper_id }}" class="product__img-wrapper supports-js">
               <div style="padding-top:{{ 1 | divided_by: featured.featured_image.aspect_ratio | times: 100}}%;">
-                <img id="{{ img_id }}"
-                     alt="{{ featured.featured_image.alt | escape }}"
-                     class="product__img lazyload"
-                     data-src="{{ img_url }}"
-                     data-widths="[150, 220, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
-                     data-aspectratio="{{ featured.featured_image.aspect_ratio }}"
-                     data-sizes="auto"
-                     data-image>
+                <img
+                  id="{{ img_id }}"
+                  alt="{{ featured.featured_image.alt | escape }}"
+                  class="product__img lazyload"
+                  data-src="{{ img_url }}"
+                  data-widths="[150, 220, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+                  data-aspectratio="{{ featured.featured_image.aspect_ratio }}"
+                  data-sizes="auto"
+                  data-image>
               </div>
             </div>
           {% else %}
-            <img src="{{ featured.featured_image.src | img_url: 'large' }}" alt="{{ featured.featured_image.alt | escape }}" class="product__img" data-image>
+            <img
+              src="{{ featured.featured_image.src | img_url: 'large' }}"
+              alt="{{ featured.featured_image.alt | escape }}"
+              class="product__img"
+              data-image>
           {% endunless %}
           <noscript>
-            <img src="{{ featured.featured_image.src | img_url: 'large' }}" alt="{{ featured.featured_image.alt | escape }}" class="product__img">
+            <img
+              src="{{ featured.featured_image.src | img_url: 'large' }}"
+              alt="{{ featured.featured_image.alt | escape }}"
+              class="product__img">
           </noscript>
         {% else %}
-          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {% capture current %}
+            {% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
           {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
       </span>
@@ -67,12 +78,13 @@
       <p class="grid-link__title grid-link__vendor">{{ featured.vendor }}</p>
     {% endif %}
     {% if featured.title != '' %}
-      <p class="grid-link__meta">
-        {%- assign price = featured.price | money -%}
-
+      {% unless product.price <= 0 %}
+        <p class="grid-link__meta">
+          {%- assign price = featured.price | money -%}
+        {% endunless %}
         {% if on_sale %}
-        <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-        <s class="grid-link__sale_price">{{ featured.compare_at_price | money }}</s>
+          <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+          <s class="grid-link__sale_price">{{ featured.compare_at_price | money }}</s>
         {% endif %}
         {% if featured.price_varies %}
           {{ 'products.general.from_html' | t: price: price }}
