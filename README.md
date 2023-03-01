@@ -10,11 +10,22 @@ Website is Shopify. Files appear to be HTML and liquid. They are saved as .liqui
 
 Use an if or if/else statement to hide both price and button.
 
-ex. {% if product.price == '0.00' %}
-        This product has no price!
-    {% endif %}
+ex. ``` {% if product.price == '0.00' %} <br />
+        This product has no price! <br />
+    {% endif %} <br />```
 
 or ex.
 
-{% for item in product.grid}
-    {% if product.proce == '0.00' %}
+```
+{% for item in product.grid} <br />
+    {% if product.proce == '0.00' %} <br />
+    {% endif %}
+{% endfor %}
+```
+
+## Solution
+
+Used ```
+{% unless product.price <= 0 %}
+ insert variable or object here
+{% endunless %}
