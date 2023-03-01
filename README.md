@@ -2,6 +2,10 @@
 
 Problem: When the product has a price listing of $0.00, the 'Add To Cart' button is grayed out, and reads 'Sold Out' instead. Shari would like this button to be removed/invisible when the product price is set to $0.00. Shari would also like the price to be hidden as well. This will allow her to post gallery works that she cannot yet sell.
 
+![First example image of problem client wants fixed](./ex1.jpg)
+
+![Second example image of problem client wants fixed](./ex2.jpg)
+
 ## Languages Used
 
 Website is Shopify. Files appear to be HTML and liquid. They are saved as .liquid
@@ -35,3 +39,7 @@ Used
  insert variable or object here
 {% endunless %}
 ```
+
+![Final screenshots of a product priced at 0.00, showing the now hidden price and button](./ex3.png)
+
+![Final screenshots of a product priced at 0.00, showing the now hidden price and button](./ex4.png)
